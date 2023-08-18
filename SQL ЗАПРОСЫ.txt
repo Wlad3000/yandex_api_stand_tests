@@ -1,0 +1,11 @@
+Select "Couriers".login, count("Orders".id) 
+From "Couriers" 
+LEFT JOIN "Orders" ON "Couriers".id = "Orders"."courierId" AND "Orders"."inDelivery"=true GROUP BY "Couriers".login;
+
+Select track, 
+    case when finished then 2
+        when cancelled then -1
+        when "inDelivery" then 1
+        else 0
+    end AS status
+From "Orders";
